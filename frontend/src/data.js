@@ -3,7 +3,7 @@ export const dna = {
     property: 'a specific lineup of chemical base pairs along its strand',
     cluster: [
         {
-            vehicle: ['necklace', 'pendant', 'strand', 'earring', 'helix'],
+            cluster_label: ['necklace', 'pendant', 'strand', 'earring', 'helix'],
             meaning: {
                 necklace: "Some explanation in the tooltip",
                 pendant: "Some explanation in the tooltip",
@@ -13,7 +13,7 @@ export const dna = {
             }
         },
         {
-            vehicle: ['maze', 'labyrinth', 'honeycomb', 'staircase', 'path'],
+            cluster_label: ['maze', 'labyrinth', 'honeycomb', 'staircase', 'path'],
             meaning: {
                 maze: "Some explanation in the tooltip",
                 labyrinth: "Some explanation in the tooltip",
@@ -23,7 +23,7 @@ export const dna = {
             }
         },
         {
-            vehicle: ['chromosome', 'nucleus', 'gene', 'molecule', 'cell'],
+            cluster_label: ['chromosome', 'nucleus', 'gene', 'molecule', 'cell'],
             meaning: {}
         }
     ],

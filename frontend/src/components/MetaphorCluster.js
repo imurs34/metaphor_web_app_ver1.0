@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Diagram, { createSchema, useSchema } from 'beautiful-react-diagrams';
 
 const CONTENT_SEPARATOR = ' | ';
@@ -17,25 +17,27 @@ const MainNode = (props) => (
     </div>
 )
 
-const CustomNode = (props) => (
-    <div className="px-3 py-3 bg-dark cluster-chart-block">
-        <div className="text-white">
-            {
-                props.data.vehicle.map(
-                    (item, index) => (
-                        <div key={`cluster-item-${index}`} className="d-flex text-center">
-                            <p className="m-1 cluster-item" data-toggle="tooltip" data-placement="bottom" title={props.data.meaning[item]}>{item}</p>
-                            <p className="m-1 cluster-item-plus">+</p>
-                        </div>
+const CustomNode = (props) => {
+    return (
+        <div className="px-3 py-3 bg-dark cluster-chart-block" onClick={() => props.data.setOpenDetails(true)}>
+            <div className="text-white">
+                {
+                    props.data.cluster_label.map(
+                        (item, index) => (
+                            <div key={`cluster-item-${index}`} className="d-flex text-center">
+                                <p className="m-1 cluster-item" data-toggle="tooltip" data-placement="bottom" title={props.data.meaning[item]}>{item}</p>
+                                <p className="m-1 cluster-item-plus">+</p>
+                            </div>
+                        )
                     )
-                )
-            }
+                }
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 
-const createInitialSchema = (concept, cluster) => {
+const createInitialSchema = (concept, cluster, openDetails, setOpenDetails) => {
     const nodes = [
         {
             id: 'main',
@@ -50,7 +52,7 @@ const createInitialSchema = (concept, cluster) => {
         const id = `cluster-${index}`
         nodes.push({
             id,
-            data: item,
+            data: {...item, setOpenDetails},
             coordinates: chartsCoords[index],
             render: CustomNode,
         })
@@ -63,9 +65,12 @@ const createInitialSchema = (concept, cluster) => {
 } 
 
 const MetaphorCluster = ({ concept, cluster }) => {
-    const initialSchema = createInitialSchema(concept, cluster);
+    const [openDetails, setOpenDetails] = useState(false);
+
+    const initialSchema = createInitialSchema(concept, cluster, openDetails, setOpenDetails);
     const [schema, { onChange }] = useSchema(initialSchema);
 
+    console.log(openDetails)
     return (
         <div className="cluster-diagram">
             <Diagram schema={schema} onChange={onChange} />
