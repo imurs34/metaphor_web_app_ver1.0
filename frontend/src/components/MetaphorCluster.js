@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Diagram, { createSchema, useSchema } from "beautiful-react-diagrams";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { MainNode, CustomNode } from "./ChartBlock";
 
 const chartsCoords = {

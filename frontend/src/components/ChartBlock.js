@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openDetailedMetaphor, openVehicleChart } from '../store/actions/chartActions';
+import {
+  openDetailedMetaphor,
+  openVehicleChart,
+} from "../store/actions/chartActions";
 
 const MainNode = (props) => (
   <div className="p-3 bg-dark main-chart-block">
@@ -9,12 +12,15 @@ const MainNode = (props) => (
 );
 
 const CustomNode = (props) => {
-  const {chartType, values} = useSelector(state => state.charts)
+  const { chartType, values } = useSelector((state) => state.charts);
   const dispatch = useDispatch();
 
   if (chartType === "label") {
     return (
-      <div className="px-3 py-3 bg-dark cluster-chart-block" onClick={() => dispatch(openVehicleChart(values))}>
+      <div
+        className="px-3 py-3 bg-dark cluster-chart-block"
+        onClick={() => dispatch(openVehicleChart(values))}
+      >
         <div className="text-white">
           <p>{props.data.cluster_label.join(" | ")}</p>
         </div>
@@ -35,10 +41,22 @@ const CustomNode = (props) => {
             >
               {item}
             </p>
-            {
-              Object.keys(props.data.explanation).includes(item) 
-              && <p className="m-1 cluster-item-plus" onClick={() => dispatch(openDetailedMetaphor(props.data.explanation))}>+</p>
-            }
+            {Object.keys(props.data.explanation).includes(item) && (
+              <p
+                className="m-1 cluster-item-plus"
+                onClick={() =>
+                  dispatch(
+                    openDetailedMetaphor({
+                      key: item,
+                      explanation: props.data.explanation,
+                      ...props.data.explanation[item],
+                    })
+                  )
+                }
+              >
+                +
+              </p>
+            )}
           </div>
         ))}
       </div>

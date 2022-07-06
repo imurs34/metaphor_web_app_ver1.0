@@ -22,7 +22,7 @@ const chartReducer = createReducer(initialState, (builder) => {
     })
     .addCase(openDetailedMetaphor, (state, action) => {
         state.details.isOpened = true;
-        state.details.values = action;
+        state.details.values = action.payload;
     })
 })
 
