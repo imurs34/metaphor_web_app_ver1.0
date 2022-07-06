@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import MDEditor from '@uiw/react-md-editor';
 import rehypeSanitize from "rehype-sanitize";
+import { dna } from '../data';
+import MetaphorIdea from './MetaphorIdea';
+
+import 'beautiful-react-diagrams/styles.css';
+import '../styles/index.css';
 
 function App() {
   const [text, setText] = useState("Some body once told me the world is gonna roll me...");
   const [selectedText, setSelectedText] = useState("");
   const [contextMenuPosition, setContextMenuPosition] = useState({x: 0, y: 0});
+  const [clusterData, setClusterData] = useState();
 
   const openContextMenu = (event) => {
     const text = window.getSelection()?.toString();
@@ -17,10 +23,15 @@ function App() {
     setSelectedText(text);
   };
 
+  const getClusterData = () => {
+    // TODO: make request to backend, fetch cluster data
+    setClusterData(dna);
+  }
+
   const ContextMenu = ({x, y}) => (
-    <div className="position-absolute bg-" style={{top: `${y}px`, left: `${x}px`}}>
-      <button>Main metaphor</button>
-      <button>Sub-metaphor</button>
+    <div className="position-absolute bg-peach rounded" style={{top: `${y}px`, left: `${x}px`}}>
+      <button onClick={getClusterData} className="btn btn-primary p-1 m-1 rounded">Main metaphor</button>
+      <button className="btn btn-primary p-1 m-1 rounded">Sub-metaphor</button>
     </div>
   );
 
@@ -41,16 +52,7 @@ function App() {
           {selectedText && <ContextMenu {...contextMenuPosition} />}
         </div>
         <div className="col-6">
-          <div className="row">
-            <div className="col-4">Concept</div>
-            <div className="col-8">. . .</div>
-
-            <div className="col-4">Property</div>
-            <div className="col-8">. . .</div>
-
-            <div className="col-4">Vehicle</div>
-            <div className="col-8">. . .</div>
-          </div>
+          {clusterData && <MetaphorIdea {...clusterData} />}
         </div>
       </div>
     </div>

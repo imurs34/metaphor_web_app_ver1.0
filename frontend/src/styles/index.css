@@ -1,0 +1,59 @@
+.bg-peach {
+    background-color: #ffedbd;
+}
+
+.bg-shadow {
+    -webkit-box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.43);
+    -moz-box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.43);
+    box-shadow: 5px 5px 3px 0px rgba(0,0,0,0.43);
+}
+
+.cluster-diagram {
+    height: 600px;
+}
+
+.bg-dark {
+    background-color: #380033 !important;
+}
+
+.main-chart-block, .cluster-chart-block {
+    border: 2px solid white;
+    border-radius: 30px;
+}
+
+.main-chart-block {
+    font-size: 1.4em;
+    -webkit-box-shadow: -10px 10px 0px 0px rgba(0,0,0,1);
+    -moz-box-shadow: -10px 10px 0px 0px rgba(0,0,0,1);
+    box-shadow: -10px 10px 0px 0px rgba(0,0,0,1);
+}
+
+.cluster-item {
+    border-radius: 20px;
+    padding: 2px 15px 2px 5px;
+    background-color: tomato;
+    -webkit-box-shadow: -5px 5px 0px 0px rgba(0,0,0,1);
+    -moz-box-shadow: -5px 5px 0px 0px rgba(0,0,0,1);
+    box-shadow: -5px 5px 0px 0px rgba(0,0,0,1);
+}
+
+.cluster-item-plus {
+    font-weight: bold;
+    background-color: white;
+    color: black;
+    margin-left: -10px !important;
+    padding: 3px 8px;
+    border-radius: 100%;
+    -webkit-box-shadow: -3px 3px 0px 0px rgba(0,0,0,1);
+    -moz-box-shadow: -3px 3px 0px 0px rgba(0,0,0,1);
+    box-shadow: -3px 3px 0px 0px rgba(0,0,0,1);
+}
+
+.cluster-item-plus:hover {
+    cursor: pointer;
+}
+
+.cluster-diagram > div {
+    background-color: #380033 !important;
+    font-weight: bold;
+}
