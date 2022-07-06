@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Diagram, { createSchema, useSchema } from "beautiful-react-diagrams";
 import { useSelector, useDispatch } from "react-redux";
+import { MainNode, CustomNode } from "./ChartBlock";
 
 const chartsCoords = {
   0: [400, 10],
@@ -8,38 +9,7 @@ const chartsCoords = {
   2: [400, 350],
 };
 
-const MainNode = (props) => (
-  <div className="p-3 bg-dark main-chart-block">
-    <div className="text-white text-uppercase">{props.content}</div>
-  </div>
-);
-
-const CustomNode = (props) => {
-  return (
-    <div
-      className="px-3 py-3 bg-dark cluster-chart-block"
-      onClick={() => props.data.setOpenDetails(true)}
-    >
-      <div className="text-white">
-        {props.data.cluster_label.map((item, index) => (
-          <div key={`cluster-item-${index}`} className="d-flex text-center">
-            <p
-              className="m-1 cluster-item"
-              data-toggle="tooltip"
-              data-placement="bottom"
-              title={props.data.meaning[item]}
-            >
-              {item}
-            </p>
-            <p className="m-1 cluster-item-plus">+</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const createInitialSchema = (concept, cluster, openDetails, setOpenDetails) => {
+const createInitialSchema = (chartType, concept, cluster) => {
   const nodes = [
     {
       id: "main",
@@ -54,7 +24,7 @@ const createInitialSchema = (concept, cluster, openDetails, setOpenDetails) => {
     const id = `cluster-${index}`;
     nodes.push({
       id,
-      data: { ...item, setOpenDetails },
+      data: { ...item, chartType },
       coordinates: chartsCoords[index],
       render: CustomNode,
     });
@@ -71,7 +41,7 @@ const MetaphorCluster = () => {
 
   const { chartType, values: { concept, cluster } } = useSelector(state => state.charts)
 
-  const initialSchema = createInitialSchema(concept, cluster);
+  const initialSchema = createInitialSchema(chartType, concept, cluster);
   const [schema, { onChange }] = useSchema(initialSchema);
 
   return (

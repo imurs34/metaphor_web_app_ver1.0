@@ -1,30 +1,83 @@
 export const dna = {
-    concept: 'dna',
-    property: 'a specific lineup of chemical base pairs along its strand',
-    cluster: [
-        {
-            cluster_label: ['necklace', 'pendant', 'strand', 'earring', 'helix'],
-            meaning: {
-                necklace: "Some explanation in the tooltip",
-                pendant: "Some explanation in the tooltip",
-                strand: "Some explanation in the tooltip",
-                earring: "Some explanation in the tooltip",
-                helix: "Some explanation in the tooltip",
-            }
-        },
-        {
-            cluster_label: ['maze', 'labyrinth', 'honeycomb', 'staircase', 'path'],
-            meaning: {
-                maze: "Some explanation in the tooltip",
-                labyrinth: "Some explanation in the tooltip",
-                honeycomb: "Some explanation in the tooltip",
-                staircase: "Some explanation in the tooltip",
-                path: "Some explanation in the tooltip",
-            }
-        },
-        {
-            cluster_label: ['chromosome', 'nucleus', 'gene', 'molecule', 'cell'],
-            meaning: {}
-        }
-    ],
-}
+  concept: "dna",
+  property: "a specific lineup of chemical base pairs along its strand",
+  cluster: [
+    {
+      cluster_label: ["necklace", "pendant", "strand", "earring", "helix"],
+      vehicle: [
+        "twine",
+        "strand",
+        "earring",
+        "ring",
+        "cord",
+        "necklace",
+        "tree",
+        "pendant",
+        "corkscrew",
+        "yarn",
+        "helix",
+        "bracelet",
+        "rope",
+        "string",
+      ],
+      meaning: {
+        necklace: "Some explanation in the tooltip",
+        pendant: "Some explanation in the tooltip",
+        strand: "Some explanation in the tooltip",
+        earring: "Some explanation in the tooltip",
+        helix: "Some explanation in the tooltip",
+      },
+    },
+    {
+      cluster_label: ["maze", "labyrinth", "honeycomb", "staircase", "path"],
+      vehicle: [
+        "honeycomb",
+        "labyrinth",
+        "cycle",
+        "beehive",
+        "snake",
+        "chain",
+        "journey",
+        "path",
+        "ladder",
+        "staircase",
+        "program",
+        "maze",
+        "body",
+        "river",
+        "spiral",
+        "blueprint",
+        "stack",
+        "universe",
+        "set",
+        "loop",
+        "highway",
+        "recipe",
+        "code",
+        "road",
+        "mystery",
+        "circle",
+        "quest",
+        "book",
+        "spring",
+        "map",
+        "story",
+        "key",
+        "building",
+        "puzzle",
+      ],
+      meaning: {},
+    },
+    {
+      cluster_label: ["chromosome", "nucleus", "gene", "molecule", "cell"],
+      vehicle: [
+        'gene',
+        'molecule',
+        'cell',
+        'chromosome',
+        'nucleus',
+      ],
+      meaning: {},
+    },
+  ],
+};
