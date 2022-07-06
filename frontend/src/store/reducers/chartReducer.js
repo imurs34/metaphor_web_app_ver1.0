@@ -3,7 +3,11 @@ import { openClusterLabelChart, openVehicleChart, openDetailedMetaphor } from '.
 
 const initialState = {
     chartType: null,
-    values: []
+    values: [],
+    details: {
+        isOpened: false,
+        values: {},
+    }
 }
 
 const chartReducer = createReducer(initialState, (builder) => {
@@ -15,6 +19,10 @@ const chartReducer = createReducer(initialState, (builder) => {
     .addCase(openVehicleChart, (state, action) => {
         state.chartType = 'vehicle';
         state.values = action.payload;
+    })
+    .addCase(openDetailedMetaphor, (state, action) => {
+        state.details.isOpened = true;
+        state.details.values = action;
     })
 })
 

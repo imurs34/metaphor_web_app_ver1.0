@@ -19,7 +19,7 @@
 .main-chart-block,
 .cluster-chart-block {
   border: 2px solid white;
-  border-radius: 30px;
+  border-radius: 10px;
   max-width: 200px;
   max-height: 300px;
   overflow-x: hidden;
@@ -28,6 +28,7 @@
 
 .main-chart-block {
   font-size: 1.4em;
+  border-radius: 30px;
   -webkit-box-shadow: -10px 10px 0px 0px rgba(0, 0, 0, 1);
   -moz-box-shadow: -10px 10px 0px 0px rgba(0, 0, 0, 1);
   box-shadow: -10px 10px 0px 0px rgba(0, 0, 0, 1);
@@ -61,4 +62,14 @@
 .cluster-diagram > div {
   background-color: #380033 !important;
   font-weight: bold;
+}
+
+.cluster-chart-block::-webkit-scrollbar {
+    width: 0.3em;
+    background-color: transparent;
+}
+
+.cluster-chart-block::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 20px;
 }

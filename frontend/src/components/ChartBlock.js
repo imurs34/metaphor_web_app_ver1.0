@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openVehicleChart } from '../store/actions/chartActions';
+import { openDetailedMetaphor, openVehicleChart } from '../store/actions/chartActions';
 
 const MainNode = (props) => (
   <div className="p-3 bg-dark main-chart-block">
@@ -35,7 +35,10 @@ const CustomNode = (props) => {
             >
               {item}
             </p>
-            <p className="m-1 cluster-item-plus">+</p>
+            {
+              Object.keys(props.data.explanation).includes(item) 
+              && <p className="m-1 cluster-item-plus" onClick={() => dispatch(openDetailedMetaphor(props.data.explanation))}>+</p>
+            }
           </div>
         ))}
       </div>

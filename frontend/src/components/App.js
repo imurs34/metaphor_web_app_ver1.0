@@ -8,13 +8,15 @@ import { openClusterLabelChart } from '../store/actions/chartActions';
 
 import 'beautiful-react-diagrams/styles.css';
 import '../styles/index.css';
+import MetaphorDetails from './MetaphorDetails';
 
 function App() {
   const [text, setText] = useState("Some body once told me the world is gonna roll me...");
   const [selectedText, setSelectedText] = useState("");
   const [contextMenuPosition, setContextMenuPosition] = useState({x: 0, y: 0});
 
-  const chartType = useSelector(state => state?.charts?.chartType)
+  const { chartType, details: { isOpened } } = useSelector(state => state?.charts)
+
   const dispatch = useDispatch();
 
   const openContextMenu = (event) => {
@@ -56,7 +58,8 @@ function App() {
           {selectedText && <ContextMenu {...contextMenuPosition} />}
         </div>
         <div className="col-6">
-          {chartType && <MetaphorIdea />}
+          {chartType && !isOpened && <MetaphorIdea />}
+          {isOpened && <MetaphorDetails />}
         </div>
       </div>
     </div>
