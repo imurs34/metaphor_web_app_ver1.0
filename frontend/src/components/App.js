@@ -1,45 +1,46 @@
-import React, { useState } from 'react';
-import MDEditor from '@uiw/react-md-editor';
+import React, { useState } from "react";
+import MDEditor from "@uiw/react-md-editor";
 import rehypeSanitize from "rehype-sanitize";
-import { dna } from '../data';
-import MetaphorIdea from './MetaphorIdea';
-import { useSelector, useDispatch } from 'react-redux';
-import { openClusterLabelChart } from '../store/actions/chartActions';
-
-import 'beautiful-react-diagrams/styles.css';
-import '../styles/index.css';
-import MetaphorDetails from './MetaphorDetails';
+import MetaphorIdea from "./MetaphorIdea";
+import { useSelector, useDispatch } from "react-redux";
+import ContextMenu from "./ContextMenu";
+import "../styles/index.css";
+import MetaphorDetails from "./MetaphorDetails";
+import {
+  showContextMenu,
+  hideContextMenu,
+} from "../store/actions/contextMenuActions";
+import "beautiful-react-diagrams/styles.css";
 
 function App() {
-  const [text, setText] = useState("Some body once told me the world is gonna roll me...");
-  const [selectedText, setSelectedText] = useState("");
-  const [contextMenuPosition, setContextMenuPosition] = useState({x: 0, y: 0});
+  const [text, setText] = useState(
+    "Some body once told me the world is gonna roll me..."
+  );
 
-  const { chartType, details: { isOpened } } = useSelector(state => state?.charts)
+  const {
+    chartType,
+    details: { isOpened },
+  } = useSelector((state) => state?.charts);
+  const { display, selectedText } = useSelector((state) => state?.contextMenu);
 
   const dispatch = useDispatch();
 
   const openContextMenu = (event) => {
     const text = window.getSelection()?.toString();
     if (!text) {
-      setSelectedText('');
-      return; 
-    };
-    setContextMenuPosition({x: event.clientX, y: event.clientY + 10})
-    setSelectedText(text);
+      dispatch(hideContextMenu());
+      return;
+    }
+    dispatch(
+      showContextMenu({
+        text: selectedText,
+        coords: {
+          x: event.clientX,
+          y: event.clientY + 10,
+        },
+      })
+    );
   };
-
-  const getClusterData = () => {
-    // TODO: make request to backend, fetch cluster data
-    dispatch(openClusterLabelChart(dna));
-  }
-
-  const ContextMenu = ({x, y}) => (
-    <div className="position-absolute bg-peach rounded" style={{top: `${y}px`, left: `${x}px`}}>
-      <button onClick={getClusterData} className="btn btn-primary p-1 m-1 rounded">Main metaphor</button>
-      <button className="btn btn-primary p-1 m-1 rounded">Sub-metaphor</button>
-    </div>
-  );
 
   return (
     <div className="container pt-5">
@@ -55,7 +56,7 @@ function App() {
             preview="edit"
             onMouseUp={openContextMenu}
           />
-          {selectedText && <ContextMenu {...contextMenuPosition} />}
+          {display && <ContextMenu />}
         </div>
         <div className="col-6">
           {chartType && !isOpened && <MetaphorIdea />}
