@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Diagram, { createSchema, useSchema } from "beautiful-react-diagrams";
 import { useSelector } from "react-redux";
 import { MainNode, CustomNode } from "./ChartBlock";
