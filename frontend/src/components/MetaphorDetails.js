@@ -12,12 +12,12 @@ const CustomNode = (props) => (
 const MetaphorDetails = () => {
   const {
     details: {
-      values: { key, raw, writing, explanation, charts, chartText },
+      values: { key, writing, explanation, charts, chartText },
     },
   } = useSelector((state) => state?.charts);
   const dispatch = useDispatch();
   const currentPage = Object.keys(explanation).indexOf(key) + 1;
-  const totalPages = Object.keys(explanation).length - 1;
+  const totalPages = Object.keys(explanation).length;
 
   const SPACE_BETWEEN = 70;
   const nodes = [];
@@ -61,7 +61,7 @@ const MetaphorDetails = () => {
   };
 
   const getNextPage = () => {
-    if (currentPage === totalPages) return;
+    if (currentPage >= totalPages - 1) return;
     const newKey = Object.keys(explanation)[currentPage]; // because it's [index + 1]
     dispatch(
       openDetailedMetaphor({
@@ -87,7 +87,7 @@ const MetaphorDetails = () => {
             &lt;
           </button>
           <button className="btn disabled">
-            {currentPage} / {totalPages}
+            {currentPage} / {totalPages - 1}
           </button>
           <button
             className={`btn chart-detailed-right ${

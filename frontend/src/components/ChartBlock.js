@@ -29,7 +29,6 @@ const CustomNode = (props) => {
   }
 
   const getItemColor = (index, length) => {
-    console.log(index)
     if (index < 2) {
       return "chart-item-1"
     }
