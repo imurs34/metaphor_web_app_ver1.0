@@ -1,6 +1,13 @@
+import Diagram, { createSchema } from "beautiful-react-diagrams";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { openDetailedMetaphor } from "../store/actions/chartActions";
+
+const CustomNode = (props) => (
+  <div className="p-2 big-rounded" style={{backgroundColor: props.data.color}}>
+    <div className="">{props.content}</div>
+  </div>
+);
 
 const MetaphorDetails = () => {
   const {
@@ -11,6 +18,14 @@ const MetaphorDetails = () => {
   const dispatch = useDispatch();
   const currentPage = Object.keys(explanation).indexOf(key) + 1;
   const totalPages = Object.keys(explanation).length;
+
+  const chartSchema = createSchema({
+    nodes: [
+      { id: "main", content: "DNA", coordinates: [10, 10], render: CustomNode, data: { color: "indianred" } },
+      { id: "node-1", content: key, coordinates: [100, 10], render: CustomNode, data: { color: "aqua" } },
+    ],
+    links: [{ input: "main", output: "node-1" }],
+  });
 
   const getPreviousPage = () => {
     if (currentPage <= 1) return;
@@ -38,33 +53,33 @@ const MetaphorDetails = () => {
 
   return (
     <div>
-      <h2>Extender metaphor</h2>
-      <div className="d-flex alig-items-center my-3 justify-content-center">
-        <button
-          className={`btn btn-info ${currentPage <= 1 ? "disabled" : ""}`}
-          onClick={getPreviousPage}
-        >
-          &lt;
-        </button>
-        <button className="btn btl-link disabled">
-          {currentPage} / {totalPages}
-        </button>
-        <button
-          className={`btn btn-info ${
-            currentPage === totalPages ? "disabled" : ""
-          }`}
-          onClick={getNextPage}
-        >
-          &gt;
-        </button>
+      <div className="d-flex justify-content-between align-items-center">
+        <h2>Extender metaphor</h2>
+
+        <div className="d-flex alig-items-center my-3 justify-content-center">
+          <button
+            className={`btn btn-info ${currentPage <= 1 ? "disabled" : ""}`}
+            onClick={getPreviousPage}
+          >
+            &lt;
+          </button>
+          <button className="btn btl-link disabled">
+            {currentPage} / {totalPages}
+          </button>
+          <button
+            className={`btn btn-info ${
+              currentPage === totalPages ? "disabled" : ""
+            }`}
+            onClick={getNextPage}
+          >
+            &gt;
+          </button>
+        </div>
       </div>
 
-      <div className="row">
-        <div className="col-2">
-          <button className="btn btn-primary">DNA</button>
-        </div>
-        <div className="col-2">
-          <button className="btn btn-danger">{key}</button>
+      <div className="row mb-3">
+        <div className="col-4">
+          <Diagram schema={chartSchema} />
         </div>
         <div className="col-8">
           <p>{raw}</p>
