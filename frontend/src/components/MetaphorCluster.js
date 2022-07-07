@@ -5,8 +5,8 @@ import { MainNode, CustomNode } from "./ChartBlock";
 
 const chartsCoords = {
   0: [400, 10],
-  1: [10, 200],
-  2: [400, 350],
+  1: [10, 100],
+  2: [400, 400],
 };
 
 const createInitialSchema = (chartType, concept, cluster) => {
@@ -14,7 +14,7 @@ const createInitialSchema = (chartType, concept, cluster) => {
     {
       id: "main",
       content: concept,
-      coordinates: [280, 280],
+      coordinates: [420, 300],
       render: MainNode,
     },
   ];
@@ -24,7 +24,7 @@ const createInitialSchema = (chartType, concept, cluster) => {
     const id = `cluster-${index}`;
     nodes.push({
       id,
-      data: { ...item, chartType },
+      data: { ...item, chartType, index },
       coordinates: chartsCoords[index],
       render: CustomNode,
     });

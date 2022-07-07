@@ -131,8 +131,14 @@
   background-color: #addaff;
 }
 
-.chart-item-4 {
+.chart-item-5 {
   background-color: #20a9d2;
 }
 
+.cluster-block-0 {
+  height: 180px;
+}
 
+.cluster-block-1 {
+  height: 500px;
+}

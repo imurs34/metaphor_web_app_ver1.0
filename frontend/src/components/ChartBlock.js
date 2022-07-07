@@ -18,7 +18,7 @@ const CustomNode = (props) => {
   if (chartType === "label") {
     return (
       <div
-        className="px-3 py-3 bg-dark cluster-chart-block"
+        className={`px-3 py-3 bg-dark cluster-chart-block cluster-block-${props.data.index}`}
         onClick={() => dispatch(openVehicleChart(values))}
       >
         <div className="text-white">
@@ -28,13 +28,33 @@ const CustomNode = (props) => {
     );
   }
 
+  const getItemColor = (index, length) => {
+    console.log(index)
+    if (index < 2) {
+      return "chart-item-1"
+    }
+    if (index < 3) {
+      return "chart-item-2";
+    }
+    if (index < 5) {
+      return "chart-item-3"
+    }
+    if (index < 6) {
+      return "chart-item-4"
+    }
+    return "chart-item-5";
+  };
+
   return (
     <div className="px-3 py-3 bg-dark cluster-chart-block">
       <div className="text-white">
         {props.data.vehicle.map((item, index) => (
           <div key={`cluster-item-${index}`} className="d-flex text-center">
             <p
-              className="m-1 cluster-item"
+              className={`m-1 cluster-item text-black ${getItemColor(
+                index,
+                props.data.vehicle.length
+              )}`}
               data-toggle="tooltip"
               data-placement="bottom"
               title={props.data.meaning[item]}
