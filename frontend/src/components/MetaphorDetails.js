@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { openDetailedMetaphor } from "../store/actions/chartActions";
 
 const CustomNode = (props) => (
-  <div className="p-2 big-rounded" style={{backgroundColor: props.data.color}}>
+  <div
+    className="p-2 big-rounded"
+    style={{ backgroundColor: props.data.color }}
+  >
     <div className="">{props.content}</div>
   </div>
 );
@@ -12,20 +15,35 @@ const CustomNode = (props) => (
 const MetaphorDetails = () => {
   const {
     details: {
-      values: { key, raw, writing, explanation },
+      values: { key, raw, writing, explanation, charts, chartText },
     },
   } = useSelector((state) => state?.charts);
   const dispatch = useDispatch();
   const currentPage = Object.keys(explanation).indexOf(key) + 1;
-  const totalPages = Object.keys(explanation).length;
+  const totalPages = Object.keys(explanation).length - 1;
 
-  const chartSchema = createSchema({
-    nodes: [
-      { id: "main", content: "DNA", coordinates: [10, 10], render: CustomNode, data: { color: "indianred" } },
-      { id: "node-1", content: key, coordinates: [100, 10], render: CustomNode, data: { color: "aqua" } },
-    ],
-    links: [{ input: "main", output: "node-1" }],
+  const SPACE_BETWEEN = 70;
+  const nodes = [];
+  const links = [];
+  charts.slice(0, 4).forEach((item, index) => {
+    nodes.push({
+      id: `main-${index}`,
+      content: item[0],
+      coordinates: [10, SPACE_BETWEEN * index + 10],
+      render: CustomNode,
+      data: { color: "indianred" },
+    });
+    nodes.push({
+      id: `node-${index}`,
+      content: item[1],
+      coordinates: [170, SPACE_BETWEEN * index + 10],
+      render: CustomNode,
+      data: { color: "aqua" },
+    });
+    links.push({ input: `main-${index}`, output: `node-${index}` })
   });
+
+  const chartSchema = createSchema({ nodes, links });
 
   const getPreviousPage = () => {
     if (currentPage <= 1) return;
@@ -78,11 +96,13 @@ const MetaphorDetails = () => {
       </div>
 
       <div className="row mb-3">
-        <div className="col-4">
+        <div className="col-6" style={{height: "300px"}}>
           <Diagram schema={chartSchema} />
         </div>
-        <div className="col-8">
-          <p>{raw}</p>
+        <div className="col-6">
+          {chartText.slice(0, 4).map((item, index) => (
+            <p className="chart-text" key={`chart-text-${index}`}>{item}</p>
+          ))}
         </div>
       </div>
       <div className="d-flex align-items-center">

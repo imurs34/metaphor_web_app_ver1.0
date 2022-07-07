@@ -185,7 +185,7 @@ export const dna = {
           charts: [
             ["DNA", "book"],
             ["nucleotides", "letters"],
-            ["sugar-phosphate backbone", "spine of the book"],
+            ["sugar-phosphate", "spine of the book"],
             ["base pairs", "pages"],
             ["double helix", "structure of the book"],
           ],
@@ -205,7 +205,7 @@ export const dna = {
             ["DNA", "staircase"],
             ["double helix", "structure of the staircase"],
             ["nucleotides", "steps"],
-            ["sugar-phosphate backbone", "handrail"],
+            ["sugar-phosphate", "handrail"],
           ],
           chartText: [
             "",
