@@ -61,7 +61,7 @@ const MetaphorDetails = () => {
   };
 
   const getNextPage = () => {
-    if (currentPage >= totalPages - 1) return;
+    if (currentPage >= totalPages) return;
     const newKey = Object.keys(explanation)[currentPage]; // because it's [index + 1]
     dispatch(
       openDetailedMetaphor({
@@ -87,7 +87,7 @@ const MetaphorDetails = () => {
             &lt;
           </button>
           <button className="btn disabled">
-            {currentPage} / {totalPages - 1}
+            {currentPage} / {totalPages}
           </button>
           <button
             className={`btn chart-detailed-right ${

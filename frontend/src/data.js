@@ -258,7 +258,8 @@ export const dna = {
           charts: [
             ["DNA", "a set of instructions"],
             ["DNA strands", "wires"],
-            ["genes", "computer chips"][("proteins", "transistors")],
+            ["genes", "computer chips"],
+            ["proteins", "transistors"],
             ["cell", "computer"],
             ["body", "network"],
           ],
