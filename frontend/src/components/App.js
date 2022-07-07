@@ -14,7 +14,7 @@ import "beautiful-react-diagrams/styles.css";
 
 function App() {
   const [text, setText] = useState(
-    "Some body once told me the world is gonna roll me..."
+    "Inside a cell is a long strand of the chemical DNA (deoxyribonucleic acid). A DNA sequence is a cpecific lineup of chemical base pairs along its strand. The part of DNA thhat determines what protein to produce and wher, is called a gene. Nucleotide in DNA is..."
   );
 
   const {
