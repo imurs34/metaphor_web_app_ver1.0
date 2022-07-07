@@ -4,10 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { openDetailedMetaphor } from "../store/actions/chartActions";
 
 const CustomNode = (props) => (
-  <div
-    className="p-2 big-rounded"
-    style={{ backgroundColor: props.data.color }}
-  >
+  <div className={`p-2 big-rounded ${props.data.className}`}>
     <div className="">{props.content}</div>
   </div>
 );
@@ -31,16 +28,22 @@ const MetaphorDetails = () => {
       content: item[0],
       coordinates: [10, SPACE_BETWEEN * index + 10],
       render: CustomNode,
-      data: { color: "indianred" },
+      data: {
+        className:
+          index === 0 ? "chart-detailed-first-left" : "chart-detailed-left",
+      },
     });
     nodes.push({
       id: `node-${index}`,
       content: item[1],
       coordinates: [170, SPACE_BETWEEN * index + 10],
       render: CustomNode,
-      data: { color: "aqua" },
+      data: {
+        className:
+          index === 0 ? "chart-detailed-first-right" : "chart-detailed-right",
+      },
     });
-    links.push({ input: `main-${index}`, output: `node-${index}` })
+    links.push({ input: `main-${index}`, output: `node-${index}` });
   });
 
   const chartSchema = createSchema({ nodes, links });
@@ -76,16 +79,18 @@ const MetaphorDetails = () => {
 
         <div className="d-flex alig-items-center my-3 justify-content-center">
           <button
-            className={`btn btn-info ${currentPage <= 1 ? "disabled" : ""}`}
+            className={`btn ${
+              currentPage <= 1 ? "disabled" : ""
+            } chart-detailed-right`}
             onClick={getPreviousPage}
           >
             &lt;
           </button>
-          <button className="btn btl-link disabled">
+          <button className="btn disabled">
             {currentPage} / {totalPages}
           </button>
           <button
-            className={`btn btn-info ${
+            className={`btn chart-detailed-right ${
               currentPage === totalPages ? "disabled" : ""
             }`}
             onClick={getNextPage}
@@ -96,12 +101,14 @@ const MetaphorDetails = () => {
       </div>
 
       <div className="row mb-3">
-        <div className="col-6" style={{height: "300px"}}>
+        <div className="col-6" style={{ height: "300px" }}>
           <Diagram schema={chartSchema} />
         </div>
         <div className="col-6">
           {chartText.slice(0, 4).map((item, index) => (
-            <p className="chart-text" key={`chart-text-${index}`}>{item}</p>
+            <p className="chart-text" key={`chart-text-${index}`}>
+              {item}
+            </p>
           ))}
         </div>
       </div>
