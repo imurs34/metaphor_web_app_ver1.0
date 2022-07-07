@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import MetaphorCluster from "./MetaphorCluster";
 
 const MetaphorIdea = () => {
-
-	const { values: {concept, property} } = useSelector(state => state.charts);
+  const {
+    values: { concept, property },
+  } = useSelector((state) => state.charts);
 
   return (
     <div>
@@ -32,6 +33,48 @@ const MetaphorIdea = () => {
           <b>Goals</b>
         </div>
         <div className="col bg-shadow"></div>
+      </div>
+      <div className="row mt-4">
+        <div className="col">
+          <div>
+            <input
+              type="range"
+              className="form-range"
+              min="0"
+              max="100"
+              defaultValue="35"
+              id="customRange"
+            />
+            <div className="d-flex justify-content-between">
+              <p className="m-0 p-0">
+                <b>Coherent</b>
+              </p>
+              <p className="m-0 p-0">
+                <b>Creative</b>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="col">
+          <div>
+            <input
+              type="range"
+              className="form-range"
+              min="0"
+              max="100"
+              defaultValue="80"
+              id="customRange"
+            />
+            <div className="d-flex justify-content-between">
+              <p className="m-0 p-0">
+                <b>Concrete</b>
+              </p>
+              <p className="m-0 p-0">
+                <b>Abstract</b>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="my-3">
